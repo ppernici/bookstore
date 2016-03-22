@@ -1,0 +1,39 @@
+﻿@model BookStore.WebUI.Models.NavigationViewModel
+
+@Html.ActionLink("Home", "List", "Product", null, new { @class = "btn btn-block btn-default btn-lg" })
+
+@*Using view model *@
+@foreach (var cat in Model.Categories)
+{
+    @Html.RouteLink(cat,
+        new
+        {
+            controller = "Product",
+            action = "List",
+            category = cat,
+            page = 1
+        },
+        new
+        {
+            @class = "btn btn-block btn-default btn-lg"
+                    + (cat == Model.CurrentCategory ? " btn-primary" : "")
+        }
+    )
+}
+
+@*
+    Using non-view model technique.
+@foreach (var link in Model)
+{
+    @Html.RouteLink(link, 
+        new
+        {
+            controller = "Product",
+            action = "List",
+            category = link,
+            page = 1
+        },
+        new { @class = "btn btn-block btn-default btn-lg" }
+    )
+}
+*@

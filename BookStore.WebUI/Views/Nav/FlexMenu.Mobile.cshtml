@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+    
+    </div>
+</body>
+</html>
+
+@model BookStore.WebUI.Models.NavigationViewModel
+
+<div data-role="navbar">
+    <ul>
+        @foreach (var cat in Model.Categories)
+        {
+            <li>
+                @Html.RouteLink(cat,
+                new
+                {
+                    controller = "Product",
+                    action = "List",
+                    category = cat,
+                    page = 1
+                },
+                new
+                {
+                    data_transition = "fade",
+                    @class = (cat == Model.CurrentCategory ? "ui-btn-active" : null)
+                })
+            </li>
+        }
+    </ul>
+</div>

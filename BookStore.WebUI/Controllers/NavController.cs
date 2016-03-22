@@ -27,7 +27,7 @@ namespace BookStore.WebUI.Controllers
         /// Generates a menu with categories. 
         /// </summary>
         /// <returns></returns>
-        public PartialViewResult Menu(string category = null, bool horizontalLayout = false)
+        public PartialViewResult Menu(string category = null)
         {
             IEnumerable<string> categories = repository.Products
                                                        .Select(x => x.Category)
@@ -40,10 +40,7 @@ namespace BookStore.WebUI.Controllers
                 Categories = categories
             };
 
-            // Send the correct name so that layout will be correct for device.
-            string viewName = horizontalLayout ? "MenuHorizontal" : "Menu";
-
-            return PartialView(viewName, navigator);
+            return PartialView("FlexMenu", navigator);
         }
     }
 }
